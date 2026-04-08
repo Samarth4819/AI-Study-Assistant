@@ -1,0 +1,11 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+python-multipart>=0.0.9
+# Use a modern pydantic range to improve wheel availability on newer Python versions.
+pydantic>=2.11,<3.0
+PyPDF2>=3.0.1
+# OpenAI client for high-quality summary, key points, and quiz generation.
+openai>=1.40,<2.0
+# Optional NLP stack (uncomment if using local transformer models)
+# transformers==4.44.2
+# torch==2.4.1
