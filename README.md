@@ -75,14 +75,14 @@ pip install -r requirements.txt
 
 ### 2.1) Enable AI-quality generation (recommended)
 
-Set your OpenAI API key before running backend:
+Set your Gemini API key before running backend:
 
 ```powershell
-$env:OPENAI_API_KEY="your_api_key_here"
-$env:OPENAI_MODEL="gpt-4o-mini"
+$env:GEMINI_API_KEY="your_api_key_here"
+$env:GEMINI_MODEL="gemini-2.5-flash"
 ```
 
-If `OPENAI_API_KEY` is set, summary/key points/quiz are generated using LLM prompts for much better quality.
+If `GEMINI_API_KEY` is set, summary/key points/quiz are generated using LLM prompts for much better quality.
 If it is not set, the app falls back to local heuristic logic.
 
 If you want to test optional local transformer summarization:
@@ -130,11 +130,11 @@ Frontend runs at `http://localhost:3000`.
 ## NLP Integration Notes
 
 Current implementation supports two modes:
-- LLM mode (recommended): OpenAI-powered generation for summary, key points, and quiz quality similar to modern AI assistants.
+- LLM mode (recommended): Gemini-powered generation for summary, key points, and quiz quality similar to modern AI assistants.
 - Fallback mode: local deterministic logic when API key is not configured.
 
 - `backend/app/services/llm_client.py`
-	- Central OpenAI chat-completion wrapper
+	- Central Gemini API wrapper
 	- Handles JSON extraction for structured outputs
 - `backend/app/services/summarize.py`
 	- LLM summary prompt with concise highlights

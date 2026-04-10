@@ -4,8 +4,8 @@ import json
 import os
 from typing import Any
 
-
-MAX_INPUT_CHARS = 12000
+# Gemini 2.5 Flash has a large context window, so we can support more text.
+MAX_INPUT_CHARS = 100000
 
 
 def _truncate_text(text: str) -> str:
@@ -49,56 +49,60 @@ def _extract_json(text: str) -> dict[str, Any] | None:
 
 
 def generate_text(system_prompt: str, user_prompt: str, temperature: float = 0.2) -> str | None:
-    """Generate plain text using OpenAI if credentials are configured."""
-    api_key = os.getenv("OPENAI_API_KEY")
+    """Generate plain text using Gemini if credentials are configured."""
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return None
 
-    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     try:
-        from openai import OpenAI  # type: ignore
+        from google import genai
+        from google.genai import types
 
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
             model=model,
-            temperature=temperature,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": _truncate_text(user_prompt)},
-            ],
+            contents=_truncate_text(user_prompt),
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=temperature,
+            ),
         )
 
-        content = response.choices[0].message.content
+        content = response.text
         return (content or "").strip() or None
-    except Exception:
+    except Exception as e:
+        print(f"Gemini API Error: {e}")
         # Return None so caller can use deterministic fallback logic.
         return None
 
 
 def generate_json(system_prompt: str, user_prompt: str, temperature: float = 0.2) -> dict[str, Any] | None:
-    """Generate structured JSON using OpenAI if credentials are configured."""
-    api_key = os.getenv("OPENAI_API_KEY")
+    """Generate structured JSON using Gemini if credentials are configured."""
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return None
 
-    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     try:
-        from openai import OpenAI  # type: ignore
+        from google import genai
+        from google.genai import types
 
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
             model=model,
-            temperature=temperature,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": _truncate_text(user_prompt)},
-            ],
-            response_format={"type": "json_object"},
+            contents=_truncate_text(user_prompt),
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=temperature,
+                response_mime_type="application/json",
+            ),
         )
 
-        content = response.choices[0].message.content or ""
+        content = response.text or ""
         return _extract_json(content)
-    except Exception:
+    except Exception as e:
+        print(f"Gemini API Error: {e}")
         return None
