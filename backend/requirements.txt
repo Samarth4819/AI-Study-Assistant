@@ -8,3 +8,4 @@ google-genai>=0.3.0
 # Optional NLP stack (uncomment if using local transformer models)
 # transformers==4.44.2
 # torch==2.4.1
+#changed
