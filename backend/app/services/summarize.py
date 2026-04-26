@@ -19,14 +19,14 @@ def summarize_text(text: str) -> str:
     llm_summary = generate_text(
         system_prompt=(
             "You are an expert academic assistant. Write clear, accurate summaries "
-            "with no hallucinations."
+            "with no hallucinations. Use an aesthetic markdown format with appropriate emojis."
         ),
         user_prompt=(
-            "Summarize the following study material in 1 short paragraph, then add "
-            "3 concise bullet points titled 'Highlights'. Keep it simple and factual.\n\n"
+            "Summarize the following study material in 1 elegantly formatted paragraph, then add "
+            "3 concise bullet points titled '✨ Key Highlights ✨'. Make it visually engaging and aesthetic.\n\n"
             f"STUDY MATERIAL:\n{clean_text}"
         ),
-        temperature=0.2,
+        temperature=0.4,
     )
     if llm_summary:
         return llm_summary

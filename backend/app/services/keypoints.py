@@ -17,15 +17,15 @@ def extract_key_points(text: str, max_points: int = 5) -> list[str]:
     llm_payload = generate_json(
         system_prompt=(
             "You extract high-signal learning takeaways from educational content. "
-            "Return strict JSON only."
+            "Return strict JSON only. Use engaging and aesthetic language."
         ),
         user_prompt=(
             "Extract the most important concepts from the following text. "
             f"Return JSON with shape: {{\"key_points\": [string, ...]}} and include {max_points} points. "
-            "Each point should be one sentence.\n\n"
+            "Each point should be one concise sentence and start with a highly relevant, aesthetic emoji.\n\n"
             f"TEXT:\n{clean_text}"
         ),
-        temperature=0.2,
+        temperature=0.3,
     )
 
     if llm_payload and isinstance(llm_payload.get("key_points"), list):
