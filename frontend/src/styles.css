@@ -1,16 +1,16 @@
 :root {
-  --bg: #f8f6fb;
-  --surface: #ffffff;
-  --ink: #30263d;
-  --muted: #6b5c7d;
-  --line: #e6e0f2;
-  --accent: #8b5cf6;
-  --accent-hover: #7c3aed;
-  --accent-2: #ec4899;
-  --error: #ef4444;
-  --input-bg: #fff;
-  --option-bg: #f3effb;
-  --option-selected-bg: #e6e0f2;
+  --bg: #1c0b2b;
+  --surface: #2d1445;
+  --ink: #e5d5f5;
+  --muted: #b49bcf;
+  --line: #48286a;
+  --accent: #9333ea;
+  --accent-hover: #a855f7;
+  --accent-2: #d946ef;
+  --error: #fb7185;
+  --input-bg: #230d36;
+  --option-bg: #3f1e63;
+  --option-selected-bg: #5b2890;
 }
 
 * {
@@ -21,7 +21,7 @@ body {
   margin: 0;
   font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
-  background-image: linear-gradient(135deg, #f8f6fb 0%, #eef0fc 100%);
+  background-image: linear-gradient(135deg, #1c0b2b 0%, #2b1141 100%);
   color: var(--ink);
   min-height: 100vh;
 }
@@ -149,7 +149,7 @@ body {
 .preview-card {
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #faf5ff;
+  background: #361754;
   padding: 16px;
   box-shadow: inset 0 2px 4px rgba(139, 92, 246, 0.02);
 }
@@ -168,8 +168,8 @@ body {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 16px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .result-card h2 {
