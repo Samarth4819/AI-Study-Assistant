@@ -5,10 +5,11 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^7.15.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "dev":"react-scripts dev",
+    "dev": "react-scripts dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

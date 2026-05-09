@@ -49,14 +49,46 @@ body {
 }
 
 .hero p {
-  margin: 0;
+  margin: 0 0 20px 0;
   color: var(--muted);
   font-size: 1.05rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--option-bg);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: var(--option-selected-bg);
+  color: var(--accent-hover);
+}
+
+.nav-link.active {
+  background: var(--accent);
+  color: #fff;
 }
 
 .dashboard {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+}
+
+.dashboard-pages {
+  display: grid;
   gap: 24px;
 }
 
